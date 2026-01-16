@@ -8,21 +8,22 @@
 </head>
 
 <body>
+    <h1 class="linear-text-gradient">Second Graded Exercise 3Q</h1>
     <form method="post" action="submit">
         <label for="StudentID">StudentID:</label><br/>
-        <input type="number" id="StudentID" name="StudentID"> <br>
+        <input placeholder="Enter Student ID" type="number" id="StudentID" name="StudentID" onblur="checkEmpty(this)"> <br>
 
         <label for="fullName">Full Name:</label><br/>
-        <input type="text" id="fullName" name="fullName"> <br>
+        <input placeholder="Enter Full Name" type="text" id="fullName" name="fullName" onblur="checkEmpty(this)"> <br>
 
         <label for="birthDay">Birthday:</label><br/>
-        <input type="date" id="birthDate" name="birthDate"> <br>
+        <input placeholder="Enter Birthday" type="date" id="birthDate" name="birthDate" onblur="checkEmpty(this)"> <br>
 
         <label for="emailAdd">Email adress:</label><br/>
-        <input type="email" id="emailAdd" name="emailAdd"> <br>
+        <input placeholder="Enter Email Address" type="email" id="emailAdd" name="emailAdd" onblur="checkEmpty(this)"> <br>
 
         <label for="mobileCell">Mobile Phone:</label><br/>
-        <input type="text" id="mobileCell" name="mobileCell"> <br>
+        <input placeholder="Enter Mobile Phone Number" type="text" id="mobileCell" name="mobileCell" onblur="checkEmpty(this)"> <br>
 
         <label for="gradeLvl">Grade Level:</label><br/>
         <select id="gradeLvl">
@@ -57,10 +58,19 @@
         </select> <br>
 
         <label for="textArea">Why do you want to join:</label><br/>
-        <textarea id="textArea"></textarea> <br>
+        <textarea placeholder="Enter your reason here" id="textArea" name="textArea" onblur="checkEmpty(this)"></textarea> <br>
 
-        <button onclick="confirm(Are you sure?)"">
-        <button type="reset" value="Reset">
+        <button type="submit" onclick="return confirm('Are you sure?')">Submit</button>
+        <button type="reset">Reset</button>
         
     </form>
+    <script>
+        function checkEmpty(el) {
+            if (!el.value.trim()) {
+                el.classList.add('error');
+            } else {
+                el.classList.remove('error');
+            }
+        }
+    </script>
 </body>
