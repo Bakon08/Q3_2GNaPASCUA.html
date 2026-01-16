@@ -1,6 +1,7 @@
 .error {
     border: 2px solid red;
     background-color: #ffe6e6;
+    color: black
 }
 body {
     font-family: 'Times New Roman', Times, serif;
