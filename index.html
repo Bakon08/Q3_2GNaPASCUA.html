@@ -9,7 +9,8 @@
 
 <body>
     <h1 class="linear-text-gradient">Second Graded Exercise 3Q</h1>
-    <form method="post" action="submit">
+    <p class="box"><a href="viewSignUps.html"> View Signups </a></p>
+    <form method="post">
         <label for="StudentID">StudentID:</label><br/>
         <input placeholder="Enter Student ID" type="number" id="StudentID" name="StudentID" onblur="checkEmpty(this)"> <br>
 
@@ -48,7 +49,7 @@
 
         <label for="prefOrg">Preferred Organization/Club:</label><br/>
         <select id="prefOrg">
-            <option value="Elipsis">Elipsis</option>
+            <option value="Ellipsis">Ellipsis</option>
             <option value="Flux">Flux</option>
             <option value="Himig Agham">Himig Agham</option>
             <option value="Bravura">Bravura</option>
@@ -60,7 +61,7 @@
         <label for="textArea">Why do you want to join:</label><br/>
         <textarea placeholder="Enter your reason here" id="textArea" name="textArea" onblur="checkEmpty(this)"></textarea> <br>
 
-        <button type="submit" onclick="return confirm('Are you sure?')">Submit</button>
+        <button type="submit">Submit</button>
         <button type="reset">Reset</button>
         
     </form>
@@ -72,5 +73,30 @@
                 el.classList.remove('error');
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (!confirm('Are you sure?')) return;
+
+                const data = {
+                    studentID: document.getElementById('StudentID').value.trim(),
+                    fullName: document.getElementById('fullName').value.trim(),
+                    emailAdd: document.getElementById('emailAdd').value.trim(),
+                    mobileCell: document.getElementById('mobileCell').value.trim(),
+                    gradeLvl: document.getElementById('gradeLvl').value,
+                    type: (document.querySelector('input[name="type"]:checked') || {}).value || '',
+                    prefOrg: document.getElementById('prefOrg').value,
+                };
+
+                const key = 'submissions';
+                const existing = JSON.parse(localStorage.getItem(key) || '[]');
+                existing.push(data);
+                localStorage.setItem(key, JSON.stringify(existing));
+
+                alert('Submission saved locally.');
+            });
+        });
     </script>
 </body>

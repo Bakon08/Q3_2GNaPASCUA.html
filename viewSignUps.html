@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Second Graded Exercise 3Q</title>
+</head>
+
+<body>
+    <h1 class="linear-text-gradient">Sign Up Submissions</h1>
+    <p class="box"><a href="index.html"> Back to Sign Up Form </a></p>
+    <div style="max-width: 1200px; margin: 20px auto; text-align: left;">
+        <label for="clubFilter" style="color: #1dfff4; font-weight: bold; margin-right: 10px;">Filter by Club:</label>
+        <select id="clubFilter" style="padding: 8px; border-radius: 4px; border: 1px solid #493030; background-color: #333; color: #1dfff4; cursor: pointer;">
+            <option value="">All Clubs</option>
+        </select>
+    </div>
+    <div id="submissionsContainer"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() { //basically tells the page to be patient and wait for it to load
+            const submissionsContainer = document.getElementById('submissionsContainer'); //gets the html container here (where to put the table)
+            const clubFilter = document.getElementById('clubFilter');
+            const submissions = JSON.parse(localStorage.getItem('submissions')) || []; //gets the string under the key 'submissions' 
+
+            if (submissions.length === 0) {
+                submissionsContainer.innerHTML = '<p>No sign-up submissions found.</p>';
+                return;
+            }
+
+            const allClubs = ['Elipsis', 'Flux', 'Himig Agham', 'Bravura', 'Tomorrow', 'Pallastro', 'Volant'];
+            allClubs.forEach(club => {
+                const option = document.createElement('option');
+                option.value = club;
+                option.textContent = club;
+                clubFilter.appendChild(option);
+            });
+
+            function renderTable(dataToDisplay) {
+                submissionsContainer.innerHTML = ''; // clears previous content
+                
+                if (dataToDisplay.length === 0) {
+                    submissionsContainer.innerHTML = '<p style="color: #1dfff4; text-align: center; font-size: 16px; margin: 30px 0;">No sign-ups for this club</p>';
+                    return;
+                }
+                
+                const table = document.createElement('table'); //creates the table
+                const headerRow = document.createElement('tr'); //creates the first row of the table
+                const headers = ['Student ID', 'Full Name', 'Email Address', 'Mobile Phone', 'Grade Level', 'Type', 'Preferred Organization/Club'];
+                headers.forEach(headerText => { //loops through each header
+                    const th = document.createElement('th');
+                    th.textContent = headerText;
+                    headerRow.appendChild(th);
+                });
+                table.appendChild(headerRow);
+
+                dataToDisplay.forEach(submission => { //goes through each submission
+                    const row = document.createElement('tr');
+                    Object.values(submission).forEach(value => { //takes the data from each submission
+                        const td = document.createElement('td'); //creates cells for each data
+                        td.textContent = value;
+                        row.appendChild(td);
+                    });
+                    table.appendChild(row);
+                });
+                submissionsContainer.appendChild(table);
+            }
+
+            // renders all submissions initially
+            renderTable(submissions);
+
+            // renders filtered submissions 
+            clubFilter.addEventListener('change', function() {
+                const selectedClub = this.value;
+                if (selectedClub === '') {
+                    renderTable(submissions);
+                } else {
+                    const filtered = submissions.filter(sub => sub.prefOrg === selectedClub);
+                    renderTable(filtered);
+                }
+            });
+        });
+    </script>
+</body>

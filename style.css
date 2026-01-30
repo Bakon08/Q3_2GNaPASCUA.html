@@ -83,3 +83,70 @@ p {
 input[type="radio"] {
     margin-right: 5px;
 }
+
+.box {
+    background: linear-gradient(135deg, #0150c6df 0%, #a08bdd 100%);
+    padding: 12px 10px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    text-align: center;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    margin: 12px auto;
+    width: 220px;
+    max-width: 90%;
+    color: #062b2c;
+    font-weight: 600;
+    display: block;
+    cursor: default;
+}
+.box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.28);
+}
+
+.box a {
+    text-decoration: none;
+    color: #062b2c;
+    font-weight: 600;
+}
+
+.box a:hover {
+    color: #001a1b;
+}
+
+table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: #282A35;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table th {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    padding: 14px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    border-bottom: 2px solid #1dfff4;
+}
+
+table td {
+    padding: 12px;
+    color: #1dfff4;
+    border-bottom: 1px solid #493030;
+    font-size: 14px;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table tbody tr:hover {
+    background-color: #323543;
+    transition: background-color 0.2s ease;
+}
